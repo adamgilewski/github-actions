@@ -9,9 +9,19 @@ const base = core.getInput('base');
 
 core.info(`merging ${head} to ${base} ...`)
 
-octokit.request('POST /repos/{owner}/{repo}/merges', {
+try {
+  await octokit.request('POST /repos/{owner}/{repo}/merges', {
     owner: owner,
     repo: repo,
     base: base,
     head: head,
-}).catch(err => octokit.error(err));
+});
+} catch(error) {
+  // Octokit errors always have a `error.status` property which is the http response code
+  if (error.status) {
+    // handle Octokit error
+  } else {
+    // handle all other errors
+    throw error;
+  }
+}
