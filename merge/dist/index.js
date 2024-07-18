@@ -14,4 +14,4 @@ octokit.request('POST /repos/{owner}/{repo}/merges', {
     repo: repo,
     base: base,
     head: head,
-}).catch(err => error(err));
+}).catch(err => octokit.error(err));
