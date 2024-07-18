@@ -10,7 +10,7 @@ const base = core.getInput('base');
 core.info(`merging ${head} to ${base} ...`)
 
 try {
-  await octokit.request('POST /repos/{owner}/{repo}/merges', {
+  octokit.request('POST /repos/{owner}/{repo}/merges', {
     owner: owner,
     repo: repo,
     base: base,
